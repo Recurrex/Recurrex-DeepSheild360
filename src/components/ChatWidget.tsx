@@ -6,7 +6,26 @@ import { MessageCircle, X, Send, Sparkles } from "lucide-react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
 // Get API key - injected at build time via vite.config.ts
-const apiKey = (import.meta.env.VITE_DS_Gemini_API_Key as string | undefined) || "";
+// Try multiple sources: Vite injected, window global, or meta tags
+const apiKey = (() => {
+  // Try Vite injected variable
+  const viteKey = (import.meta.env.VITE_DS_Gemini_API_Key as string | undefined) || "";
+  if (viteKey) return viteKey;
+  
+  // Try window global if injected by Vercel
+  if (typeof window !== "undefined") {
+    const windowKey = (window as any).VITE_DS_Gemini_API_Key || (window as any).NEXT_PUBLIC_DS_Gemini_API_Key || "";
+    if (windowKey) return windowKey;
+  }
+  
+  return "";
+})();
+
+// Debug: Log the API key status
+if (typeof window !== "undefined") {
+  console.log("[v0] API Key Status:", apiKey ? `SET (length: ${apiKey.length})` : "NOT SET");
+  console.log("[v0] Vite env VITE_DS_Gemini_API_Key:", (import.meta.env.VITE_DS_Gemini_API_Key as string | undefined) ? "SET" : "NOT SET");
+}
 
 const SYSTEM_PROMPT = `
 You are Shield AI, the official intelligent assistant for Deep Shield 360, created by Team Recurrex. 
