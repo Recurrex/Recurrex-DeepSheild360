@@ -12,4 +12,10 @@ export default defineConfig({
   tanstackStart: {
     server: { entry: "server" },
   },
+  // Inject environment variables from Vercel into the client bundle at build time
+  define: {
+    "import.meta.env.VITE_DS_Gemini_API_Key": JSON.stringify(
+      process.env.NEXT_PUBLIC_DS_Gemini_API_Key || process.env.VITE_DS_Gemini_API_Key || process.env.DS_Gemini_API_Key || ""
+    ),
+  },
 });

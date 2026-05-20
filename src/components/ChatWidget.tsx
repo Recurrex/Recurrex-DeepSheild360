@@ -5,10 +5,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, Send, Sparkles } from "lucide-react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 
-// IMPORTANT: To run this directly in the browser on Vercel, your environment variable 
-// MUST be prefixed with NEXT_PUBLIC_. If you only use DS_Gemini_API_Key, Next.js will hide it from the client.
-// Rename your GitHub/Vercel secret to: NEXT_PUBLIC_DS_Gemini_API_Key
-const apiKey = process.env.NEXT_PUBLIC_DS_Gemini_API_Key || process.env.DS_Gemini_API_Key || "";
+// Get API key - injected at build time via vite.config.ts
+const apiKey = (import.meta.env.VITE_DS_Gemini_API_Key as string | undefined) || "";
 
 const SYSTEM_PROMPT = `
 You are Shield AI, the official intelligent assistant for Deep Shield 360, created by Team Recurrex. 
