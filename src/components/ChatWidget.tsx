@@ -57,7 +57,8 @@ export function ChatWidget() {
     try {
       if (!apiKey) throw new Error("API key missing");
 
-      const genAI = new GoogleGenerativeAI(apiKey);
+      const { GoogleGenerativeAI } = await import("@google/generative-ai");
+      const genAI: GoogleGenerativeAIType = new GoogleGenerativeAI(apiKey);
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
       // Format history for Gemini
