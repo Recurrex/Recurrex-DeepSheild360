@@ -9,9 +9,10 @@ import {
 } from "@tanstack/react-router";
 
 import appCss from "../styles.css?url";
-import { Navbar } from "@/components/Navbar";
+import { Navbar, useIsDashboard } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 import { ChatWidget } from "@/components/ChatWidget";
+import { AuthProvider } from "@/lib/auth-context";
 
 function NotFoundComponent() {
   return (
@@ -102,14 +103,23 @@ function RootComponent() {
   const { queryClient } = Route.useRouteContext();
   return (
     <QueryClientProvider client={queryClient}>
-      <div className="min-h-screen flex flex-col">
-        <Navbar />
-        <main className="flex-1 pt-24">
-          <Outlet />
-        </main>
-        <Footer />
-        <ChatWidget />
-      </div>
+      <AuthProvider>
+        <Shell />
+      </AuthProvider>
     </QueryClientProvider>
+  );
+}
+
+function Shell() {
+  const isDashboard = useIsDashboard();
+  return (
+    <div className="min-h-screen flex flex-col overflow-x-hidden">
+      <Navbar />
+      <main className="flex-1 pt-24">
+        <Outlet />
+      </main>
+      {!isDashboard && <Footer />}
+      {!isDashboard && <ChatWidget />}
+    </div>
   );
 }
