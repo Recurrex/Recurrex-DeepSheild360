@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate } from "@tanstack/react-router";
+import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { ArrowRight, Eye, FileText, Bell, Search, Sparkles, Activity, Cpu, Database, LayoutDashboard } from "lucide-react";
 import { ParticleField } from "@/components/ParticleField";
@@ -79,6 +79,23 @@ function HomePage() {
                 <span className="relative">Open Dashboard</span>
                 <ArrowRight className="relative h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </motion.button>
+
+              {!user && (
+                <>
+                  <Link
+                    to="/login"
+                    className="inline-flex items-center gap-2 rounded-xl px-6 py-4 text-sm font-semibold text-silver-bright border border-silver/40 hover:border-electric/60 hover:text-electric transition-all"
+                  >
+                    Log In
+                  </Link>
+                  <Link
+                    to="/signup"
+                    className="inline-flex items-center gap-2 rounded-xl px-6 py-4 text-sm font-semibold text-silver-bright border border-electric/40 hover:bg-electric/10 transition-all"
+                  >
+                    Sign Up
+                  </Link>
+                </>
+              )}
 
               <a
                 href="#features"

@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, Send, Sparkles } from "lucide-react";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import type { GoogleGenerativeAI as GoogleGenerativeAIType } from "@google/generative-ai";
 
 // IMPORTANT: To run this directly in the browser on Vercel, your environment variable 
 // MUST be prefixed with NEXT_PUBLIC_. If you only use DS_Gemini_API_Key, Next.js will hide it from the client.
@@ -57,7 +57,8 @@ export function ChatWidget() {
     try {
       if (!apiKey) throw new Error("API key missing");
 
-      const genAI = new GoogleGenerativeAI(apiKey);
+      const { GoogleGenerativeAI } = await import("@google/generative-ai");
+      const genAI: GoogleGenerativeAIType = new GoogleGenerativeAI(apiKey);
       const model = genAI.getGenerativeModel({ model: "gemini-1.5-flash" });
 
       // Format history for Gemini

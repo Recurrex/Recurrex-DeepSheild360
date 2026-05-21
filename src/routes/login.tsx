@@ -1,6 +1,6 @@
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 import { motion } from "framer-motion";
 import { Shield, Mail, Lock, Loader2 } from "lucide-react";
 import { auth } from "@/lib/firebase";
@@ -17,6 +17,7 @@ function LoginPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [err, setErr] = useState("");
+  const [info, setInfo] = useState("");
   const [busy, setBusy] = useState(false);
 
   useEffect(() => {
@@ -57,7 +58,27 @@ function LoginPage() {
             <Field icon={Mail} type="email" placeholder="Email" value={email} onChange={setEmail} />
             <Field icon={Lock} type="password" placeholder="Password" value={password} onChange={setPassword} />
 
+            <div className="flex justify-end -mt-1">
+              <button
+                type="button"
+                onClick={async () => {
+                  setErr(""); setInfo("");
+                  if (!email) return setErr("Enter your email above first");
+                  try {
+                    await sendPasswordResetEmail(auth, email);
+                    setInfo("Password reset email sent. Check your inbox.");
+                  } catch (e: any) {
+                    setErr(e.message?.replace("Firebase: ", "") || "Could not send reset email");
+                  }
+                }}
+                className="text-xs text-silver hover:text-electric transition-colors"
+              >
+                Forgot password?
+              </button>
+            </div>
+
             {err && <p className="text-xs text-destructive">{err}</p>}
+            {info && <p className="text-xs text-electric">{info}</p>}
 
             <button
               type="submit"
