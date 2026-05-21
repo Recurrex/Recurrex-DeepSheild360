@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Shield, LayoutDashboard, Video, Cctv, Bell, Search, FileText,
-  LogOut, Menu, X, Plus, Upload, Activity, Cpu,
+  LogOut, Menu, X, Plus, Upload, Activity,
 } from "lucide-react";
 import { useAuth } from "@/lib/auth-context";
 

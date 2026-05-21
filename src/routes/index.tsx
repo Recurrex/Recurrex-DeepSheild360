@@ -1,8 +1,9 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { motion } from "framer-motion";
-import { ArrowRight, Eye, FileText, Bell, Search, Sparkles, Activity, Cpu, Database } from "lucide-react";
+import { ArrowRight, Eye, FileText, Bell, Search, Sparkles, Activity, Cpu, Database, LayoutDashboard } from "lucide-react";
 import { ParticleField } from "@/components/ParticleField";
 import { TiltCard } from "@/components/TiltCard";
+import { useAuth } from "@/lib/auth-context";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -29,7 +30,9 @@ const stats = [
 
 function HomePage() {
   const navigate = useNavigate();
+  const { user } = useAuth();
   const go = () => navigate({ to: "/features" });
+  const openDashboard = () => navigate({ to: user ? "/dashboard" : "/login" });
 
   return (
     <div>
@@ -68,11 +71,12 @@ function HomePage() {
               <motion.button
                 whileHover={{ scale: 1.03 }}
                 whileTap={{ scale: 0.98 }}
-                onClick={go}
+                onClick={openDashboard}
                 className="group relative inline-flex items-center gap-2 rounded-xl px-8 py-4 text-sm font-semibold text-background bg-gradient-to-r from-silver-bright via-silver to-silver-bright bg-[length:200%_100%] hover:bg-right transition-all duration-500 shadow-elegant"
               >
                 <span className="absolute inset-0 rounded-xl bg-electric/40 blur-2xl opacity-0 group-hover:opacity-100 transition" />
-                <span className="relative">Explore the System</span>
+                <LayoutDashboard className="relative h-4 w-4" />
+                <span className="relative">Open Dashboard</span>
                 <ArrowRight className="relative h-4 w-4 group-hover:translate-x-1 transition-transform" />
               </motion.button>
 
