@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { MessageCircle, X, Send, Sparkles } from "lucide-react";
-import { GoogleGenerativeAI } from "@google/generative-ai";
+import type { GoogleGenerativeAI as GoogleGenerativeAIType } from "@google/generative-ai";
 
 // IMPORTANT: To run this directly in the browser on Vercel, your environment variable 
 // MUST be prefixed with NEXT_PUBLIC_. If you only use DS_Gemini_API_Key, Next.js will hide it from the client.
