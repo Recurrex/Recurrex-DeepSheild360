@@ -64,13 +64,31 @@ export function Navbar() {
             ))}
           </ul>
 
-          <button
-            onClick={handleDashboard}
-            className="hidden md:inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-background bg-gradient-to-r from-silver-bright to-silver hover:shadow-silver transition-all"
-          >
-            <LayoutDashboard className="h-4 w-4" />
-            Open Dashboard
-          </button>
+          <div className="hidden md:flex items-center gap-2">
+            {!user && (
+              <>
+                <Link
+                  to="/login"
+                  className="px-4 py-2 text-sm text-silver hover:text-silver-bright transition-colors"
+                >
+                  Log In
+                </Link>
+                <Link
+                  to="/signup"
+                  className="px-4 py-2 text-sm font-medium rounded-lg border border-silver/30 text-silver-bright hover:border-electric/60 hover:text-electric transition-all"
+                >
+                  Sign Up
+                </Link>
+              </>
+            )}
+            <button
+              onClick={handleDashboard}
+              className="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-background bg-gradient-to-r from-silver-bright to-silver hover:shadow-silver transition-all"
+            >
+              <LayoutDashboard className="h-4 w-4" />
+              Open Dashboard
+            </button>
+          </div>
 
           <button
             className="md:hidden text-silver-bright"
@@ -101,6 +119,26 @@ export function Navbar() {
                     </Link>
                   </li>
                 ))}
+                <li className="grid grid-cols-2 gap-2 mt-2">
+                  {!user && (
+                    <>
+                      <Link
+                        to="/login"
+                        onClick={() => setOpen(false)}
+                        className="px-4 py-3 text-center rounded-lg text-sm text-silver-bright border border-silver/30"
+                      >
+                        Log In
+                      </Link>
+                      <Link
+                        to="/signup"
+                        onClick={() => setOpen(false)}
+                        className="px-4 py-3 text-center rounded-lg text-sm text-silver-bright border border-electric/40"
+                      >
+                        Sign Up
+                      </Link>
+                    </>
+                  )}
+                </li>
                 <li>
                   <button
                     onClick={handleDashboard}
