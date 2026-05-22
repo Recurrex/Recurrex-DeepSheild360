@@ -1,6 +1,6 @@
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { Menu, X, Shield, LayoutDashboard } from "lucide-react";
+import { Menu, X, Shield, LayoutDashboard, LogOut } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/lib/auth-context";
 
@@ -13,8 +13,14 @@ const navItems = [
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    setOpen(false);
+    await logout();
+    navigate({ to: "/" });
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
@@ -65,22 +71,6 @@ export function Navbar() {
           </ul>
 
           <div className="hidden md:flex items-center gap-2">
-            {!user && (
-              <>
-                <Link
-                  to="/login"
-                  className="px-4 py-2 text-sm text-silver hover:text-silver-bright transition-colors"
-                >
-                  Log In
-                </Link>
-                <Link
-                  to="/signup"
-                  className="px-4 py-2 text-sm font-medium rounded-lg border border-silver/30 text-silver-bright hover:border-electric/60 hover:text-electric transition-all"
-                >
-                  Sign Up
-                </Link>
-              </>
-            )}
             <button
               onClick={handleDashboard}
               className="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-background bg-gradient-to-r from-silver-bright to-silver hover:shadow-silver transition-all"
@@ -88,6 +78,16 @@ export function Navbar() {
               <LayoutDashboard className="h-4 w-4" />
               Open Dashboard
             </button>
+            {user && (
+              <button
+                onClick={handleLogout}
+                className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-silver hover:text-destructive border border-silver/20 hover:border-destructive/60 transition-all"
+                aria-label="Log out"
+              >
+                <LogOut className="h-4 w-4" />
+                Log Out
+              </button>
+            )}
           </div>
 
           <button
@@ -119,26 +119,6 @@ export function Navbar() {
                     </Link>
                   </li>
                 ))}
-                <li className="grid grid-cols-2 gap-2 mt-2">
-                  {!user && (
-                    <>
-                      <Link
-                        to="/login"
-                        onClick={() => setOpen(false)}
-                        className="px-4 py-3 text-center rounded-lg text-sm text-silver-bright border border-silver/30"
-                      >
-                        Log In
-                      </Link>
-                      <Link
-                        to="/signup"
-                        onClick={() => setOpen(false)}
-                        className="px-4 py-3 text-center rounded-lg text-sm text-silver-bright border border-electric/40"
-                      >
-                        Sign Up
-                      </Link>
-                    </>
-                  )}
-                </li>
                 <li>
                   <button
                     onClick={handleDashboard}
@@ -148,6 +128,17 @@ export function Navbar() {
                     Open Dashboard
                   </button>
                 </li>
+                {user && (
+                  <li>
+                    <button
+                      onClick={handleLogout}
+                      className="mt-2 w-full inline-flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm text-silver border border-silver/30 hover:text-destructive hover:border-destructive/60"
+                    >
+                      <LogOut className="h-4 w-4" />
+                      Log Out
+                    </button>
+                  </li>
+                )}
               </ul>
             </motion.div>
           )}
