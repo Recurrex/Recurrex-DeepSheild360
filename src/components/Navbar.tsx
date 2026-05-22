@@ -119,26 +119,6 @@ export function Navbar() {
                     </Link>
                   </li>
                 ))}
-                <li className="grid grid-cols-2 gap-2 mt-2">
-                  {!user && (
-                    <>
-                      <Link
-                        to="/login"
-                        onClick={() => setOpen(false)}
-                        className="px-4 py-3 text-center rounded-lg text-sm text-silver-bright border border-silver/30"
-                      >
-                        Log In
-                      </Link>
-                      <Link
-                        to="/signup"
-                        onClick={() => setOpen(false)}
-                        className="px-4 py-3 text-center rounded-lg text-sm text-silver-bright border border-electric/40"
-                      >
-                        Sign Up
-                      </Link>
-                    </>
-                  )}
-                </li>
                 <li>
                   <button
                     onClick={handleDashboard}
@@ -148,6 +128,17 @@ export function Navbar() {
                     Open Dashboard
                   </button>
                 </li>
+                {user && (
+                  <li>
+                    <button
+                      onClick={handleLogout}
+                      className="mt-2 w-full inline-flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm text-silver border border-silver/30 hover:text-destructive hover:border-destructive/60"
+                    >
+                      <LogOut className="h-4 w-4" />
+                      Log Out
+                    </button>
+                  </li>
+                )}
               </ul>
             </motion.div>
           )}
