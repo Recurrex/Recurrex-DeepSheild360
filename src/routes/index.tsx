@@ -95,7 +95,7 @@ function HomePage() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="mt-24 grid grid-cols-3 gap-4 max-w-3xl mx-auto"
+            className="mt-24 grid grid-cols-1 sm:grid-cols-3 gap-4 max-w-3xl mx-auto"
           >
             {stats.map((s) => (
               <div key={s.label} className="glass rounded-2xl p-5 text-center">
