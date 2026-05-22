@@ -71,22 +71,6 @@ export function Navbar() {
           </ul>
 
           <div className="hidden md:flex items-center gap-2">
-            {!user && (
-              <>
-                <Link
-                  to="/login"
-                  className="px-4 py-2 text-sm text-silver hover:text-silver-bright transition-colors"
-                >
-                  Log In
-                </Link>
-                <Link
-                  to="/signup"
-                  className="px-4 py-2 text-sm font-medium rounded-lg border border-silver/30 text-silver-bright hover:border-electric/60 hover:text-electric transition-all"
-                >
-                  Sign Up
-                </Link>
-              </>
-            )}
             <button
               onClick={handleDashboard}
               className="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-background bg-gradient-to-r from-silver-bright to-silver hover:shadow-silver transition-all"
@@ -94,6 +78,16 @@ export function Navbar() {
               <LayoutDashboard className="h-4 w-4" />
               Open Dashboard
             </button>
+            {user && (
+              <button
+                onClick={handleLogout}
+                className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-silver hover:text-destructive border border-silver/20 hover:border-destructive/60 transition-all"
+                aria-label="Log out"
+              >
+                <LogOut className="h-4 w-4" />
+                Log Out
+              </button>
+            )}
           </div>
 
           <button
