@@ -32,7 +32,7 @@ function HomePage() {
   const navigate = useNavigate();
   const { user } = useAuth();
   const go = () => navigate({ to: "/features" });
-  const openDashboard = () => navigate({ to: user ? "/dashboard" : "/login" });
+  const openDashboard = () => navigate({ to: user ? "/dashboard" : "/signup" });
 
   return (
     <div>
