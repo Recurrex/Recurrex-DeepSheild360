@@ -13,8 +13,14 @@ const navItems = [
 export function Navbar() {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    setOpen(false);
+    await logout();
+    navigate({ to: "/" });
+  };
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 20);
