@@ -1,4 +1,4 @@
-import { createFileRoute, useNavigate, Link } from "@tanstack/react-router";
+import { createFileRoute, useNavigate } from "@tanstack/react-router";
 import { motion } from "framer-motion";
 import { ArrowRight, Eye, FileText, Bell, Search, Sparkles, Activity, Cpu, Database, LayoutDashboard } from "lucide-react";
 import { ParticleField } from "@/components/ParticleField";
