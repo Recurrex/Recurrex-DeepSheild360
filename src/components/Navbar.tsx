@@ -1,6 +1,6 @@
 import { Link, useNavigate, useRouterState } from "@tanstack/react-router";
 import { useState, useEffect } from "react";
-import { Menu, X, Shield, LayoutDashboard, LogOut } from "lucide-react";
+import { Menu, X, Shield, LayoutDashboard, LogOut, LogIn, UserPlus } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useAuth } from "@/lib/auth-context";
 
@@ -71,22 +71,41 @@ export function Navbar() {
           </ul>
 
           <div className="hidden md:flex items-center gap-2">
-            <button
-              onClick={handleDashboard}
-              className="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-background bg-gradient-to-r from-silver-bright to-silver hover:shadow-silver transition-all"
-            >
-              <LayoutDashboard className="h-4 w-4" />
-              Open Dashboard
-            </button>
-            {user && (
-              <button
-                onClick={handleLogout}
-                className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-silver hover:text-destructive border border-silver/20 hover:border-destructive/60 transition-all"
-                aria-label="Log out"
-              >
-                <LogOut className="h-4 w-4" />
-                Log Out
-              </button>
+            {user ? (
+              <>
+                <button
+                  onClick={handleDashboard}
+                  className="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-background bg-gradient-to-r from-silver-bright to-silver hover:shadow-silver transition-all"
+                >
+                  <LayoutDashboard className="h-4 w-4" />
+                  Open Dashboard
+                </button>
+                <button
+                  onClick={handleLogout}
+                  className="inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm text-silver hover:text-destructive border border-silver/20 hover:border-destructive/60 transition-all"
+                  aria-label="Log out"
+                >
+                  <LogOut className="h-4 w-4" />
+                  Log Out
+                </button>
+              </>
+            ) : (
+              <>
+                <Link
+                  to="/login"
+                  className="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm text-silver hover:text-silver-bright border border-silver/20 hover:border-silver/40 transition-all"
+                >
+                  <LogIn className="h-4 w-4" />
+                  Log In
+                </Link>
+                <Link
+                  to="/signup"
+                  className="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-background bg-gradient-to-r from-silver-bright to-silver hover:shadow-silver transition-all"
+                >
+                  <UserPlus className="h-4 w-4" />
+                  Sign Up
+                </Link>
+              </>
             )}
           </div>
 
@@ -119,25 +138,50 @@ export function Navbar() {
                     </Link>
                   </li>
                 ))}
-                <li>
-                  <button
-                    onClick={handleDashboard}
-                    className="mt-2 w-full inline-flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-medium text-background bg-gradient-to-r from-silver-bright to-silver"
-                  >
-                    <LayoutDashboard className="h-4 w-4" />
-                    Open Dashboard
-                  </button>
-                </li>
-                {user && (
-                  <li>
-                    <button
-                      onClick={handleLogout}
-                      className="mt-2 w-full inline-flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm text-silver border border-silver/30 hover:text-destructive hover:border-destructive/60"
-                    >
-                      <LogOut className="h-4 w-4" />
-                      Log Out
-                    </button>
-                  </li>
+                {user ? (
+                  <>
+                    <li>
+                      <button
+                        onClick={handleDashboard}
+                        className="mt-2 w-full inline-flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-medium text-background bg-gradient-to-r from-silver-bright to-silver"
+                      >
+                        <LayoutDashboard className="h-4 w-4" />
+                        Open Dashboard
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        onClick={handleLogout}
+                        className="mt-2 w-full inline-flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm text-silver border border-silver/30 hover:text-destructive hover:border-destructive/60"
+                      >
+                        <LogOut className="h-4 w-4" />
+                        Log Out
+                      </button>
+                    </li>
+                  </>
+                ) : (
+                  <>
+                    <li>
+                      <Link
+                        to="/login"
+                        onClick={() => setOpen(false)}
+                        className="mt-2 w-full inline-flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm text-silver border border-silver/30 hover:text-silver-bright hover:border-silver/50"
+                      >
+                        <LogIn className="h-4 w-4" />
+                        Log In
+                      </Link>
+                    </li>
+                    <li>
+                      <Link
+                        to="/signup"
+                        onClick={() => setOpen(false)}
+                        className="mt-2 w-full inline-flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-medium text-background bg-gradient-to-r from-silver-bright to-silver"
+                      >
+                        <UserPlus className="h-4 w-4" />
+                        Sign Up
+                      </Link>
+                    </li>
+                  </>
                 )}
               </ul>
             </motion.div>
