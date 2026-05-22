@@ -92,7 +92,7 @@ function DashboardPage() {
       {/* Main */}
       <div className="flex-1 min-w-0 flex flex-col">
         {/* Top header */}
-        <header className="sticky top-24 z-20 backdrop-blur-xl bg-background/70 border-b border-border/50">
+        <header className="sticky top-24 z-40 bg-[#0a0a0a]/95 backdrop-blur-xl border-b border-border/50">
           <div className="flex items-center justify-between p-4 md:px-8">
             <div className="flex items-center gap-3">
               <button onClick={() => setSidebarOpen(true)} className="lg:hidden text-silver-bright">
@@ -112,7 +112,7 @@ function DashboardPage() {
           </div>
         </header>
 
-        <main className="flex-1 p-4 md:p-8 space-y-6">
+        <main className="flex-1 p-4 md:p-8 pt-8 md:pt-10 space-y-6">
           {/* Action controls */}
           <section className="grid sm:grid-cols-2 gap-4">
             <ActionButton icon={Upload} title="Add Video" desc="Upload local footage for analysis" onClick={() => setModal("video")} />
