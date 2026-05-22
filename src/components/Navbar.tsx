@@ -160,28 +160,24 @@ export function Navbar() {
                     </li>
                   </>
                 ) : (
-                  <>
-                    <li>
-                      <Link
-                        to="/login"
-                        onClick={() => setOpen(false)}
-                        className="mt-2 w-full inline-flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm text-silver border border-silver/30 hover:text-silver-bright hover:border-silver/50"
-                      >
-                        <LogIn className="h-4 w-4" />
-                        Log In
-                      </Link>
-                    </li>
-                    <li>
-                      <Link
-                        to="/signup"
-                        onClick={() => setOpen(false)}
-                        className="mt-2 w-full inline-flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-medium text-background bg-gradient-to-r from-silver-bright to-silver"
-                      >
-                        <UserPlus className="h-4 w-4" />
-                        Sign Up
-                      </Link>
-                    </li>
-                  </>
+                  <li className="mt-2 flex gap-2">
+                    <Link
+                      to="/login"
+                      onClick={() => setOpen(false)}
+                      className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm text-silver border border-silver/30 hover:text-silver-bright hover:border-silver/50"
+                    >
+                      <LogIn className="h-4 w-4" />
+                      Log In
+                    </Link>
+                    <Link
+                      to="/signup"
+                      onClick={() => setOpen(false)}
+                      className="flex-1 inline-flex items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-medium text-background bg-gradient-to-r from-silver-bright to-silver"
+                    >
+                      <UserPlus className="h-4 w-4" />
+                      Sign Up
+                    </Link>
+                  </li>
                 )}
               </ul>
             </motion.div>
